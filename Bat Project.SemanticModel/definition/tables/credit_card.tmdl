@@ -1,0 +1,222 @@
+table credit_card
+	lineageTag: ae564179-bd55-4574-a6e4-6a847cabc0e9
+
+	measure Current_week_revenue =
+			CALCULATE(
+			    SUM(credit_card[Revenue]),
+			    FILTER(ALL(credit_card),
+			    credit_card[week_num2]=MAX(credit_card[week_num2])))
+		formatString: 0
+		lineageTag: 8976a2f2-dc9a-45cf-ae20-ae7b888f9c6f
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure Prev_week_revenue =
+			CALCULATE(
+			    SUM(credit_card[Revenue]),
+			    FILTER(ALL(credit_card),
+			    credit_card[week_num2]=MAX(credit_card[week_num2])-1))
+		lineageTag: d65b89b7-6382-478e-a7ea-ad3188eb7c7f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure wow_Revenue = DIVIDE(([Current_week_revenue]-[Prev_week_revenue]),[Prev_week_revenue])
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: be6ae458-d8b4-4cbf-8d42-3582744ea380
+
+	column Client_Num
+		dataType: int64
+		formatString: 0
+		lineageTag: a248c075-55fa-4e1a-a099-42a35ab128cb
+		summarizeBy: none
+		sourceColumn: Client_Num
+
+		annotation SummarizationSetBy = Automatic
+
+	column Card_Category
+		dataType: string
+		lineageTag: cb125b8f-d27e-490d-b09e-fe062446c830
+		summarizeBy: none
+		sourceColumn: Card_Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column Annual_Fees
+		dataType: int64
+		formatString: 0
+		lineageTag: 1ea5fbec-a7cf-4402-888e-2eaca3da48af
+		summarizeBy: sum
+		sourceColumn: Annual_Fees
+
+		annotation SummarizationSetBy = Automatic
+
+	column Activation_30_Days
+		dataType: int64
+		formatString: 0
+		lineageTag: 555f1ef1-aeab-483d-80db-61ba4371c7cb
+		summarizeBy: sum
+		sourceColumn: Activation_30_Days
+
+		annotation SummarizationSetBy = Automatic
+
+	column Customer_Acq_Cost
+		dataType: int64
+		formatString: 0
+		lineageTag: 4e9fa71b-7b44-4b78-966b-d824ca3c035c
+		summarizeBy: sum
+		sourceColumn: Customer_Acq_Cost
+
+		annotation SummarizationSetBy = Automatic
+
+	column Week_Start_Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 19d6ed23-c662-4c63-91e9-8ee0ac49e825
+		summarizeBy: none
+		sourceColumn: Week_Start_Date
+
+		variation Variation
+			isDefault
+			relationship: eb3fe82c-9721-47db-93d1-e70de8ad03ff
+			defaultHierarchy: LocalDateTable_416a643f-aedb-4d45-a7b3-1ccb0c134689.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Week_Num
+		dataType: string
+		lineageTag: a3b69c59-eabd-4d22-8ee8-e9d996774875
+		summarizeBy: none
+		sourceColumn: Week_Num
+
+		annotation SummarizationSetBy = Automatic
+
+	column Qtr
+		dataType: string
+		lineageTag: 87fd2f30-a8b7-4d46-84e0-2bf62fd4d123
+		summarizeBy: none
+		sourceColumn: Qtr
+
+		annotation SummarizationSetBy = Automatic
+
+	column current_year
+		dataType: int64
+		formatString: 0
+		lineageTag: 0be0020d-600c-4c65-b802-793b2be9d9d8
+		summarizeBy: sum
+		sourceColumn: current_year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Credit_Limit
+		dataType: double
+		lineageTag: 4be8f5d2-157e-46b7-98e0-60d31fecd523
+		summarizeBy: sum
+		sourceColumn: Credit_Limit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Total_Revolving_Bal
+		dataType: int64
+		formatString: 0
+		lineageTag: d53b2314-a93e-4893-9c6a-55990c8c20f9
+		summarizeBy: sum
+		sourceColumn: Total_Revolving_Bal
+
+		annotation SummarizationSetBy = Automatic
+
+	column Total_Trans_Amt
+		dataType: int64
+		formatString: 0
+		lineageTag: da3b8cbb-39c3-4777-88a7-286543d41adb
+		summarizeBy: sum
+		sourceColumn: Total_Trans_Amt
+
+		annotation SummarizationSetBy = Automatic
+
+	column Total_Trans_Vol
+		dataType: int64
+		formatString: 0
+		lineageTag: 604347f9-c318-434d-8f2f-abffd63bb8d6
+		summarizeBy: sum
+		sourceColumn: Total_Trans_Vol
+
+		annotation SummarizationSetBy = Automatic
+
+	column Avg_Utilization_Ratio
+		dataType: double
+		lineageTag: e4edd1cf-6b97-4f29-8a52-1cab574b62b5
+		summarizeBy: sum
+		sourceColumn: Avg_Utilization_Ratio
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Use Chip'
+		dataType: string
+		lineageTag: 31176159-90b6-4e7f-a329-36c06f030991
+		summarizeBy: none
+		sourceColumn: Use Chip
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Exp Type'
+		dataType: string
+		lineageTag: 60396def-59d1-4f98-993c-5b76d8ee51a0
+		summarizeBy: none
+		sourceColumn: Exp Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Interest_Earned
+		dataType: double
+		formatString: 0
+		lineageTag: 00093362-56d3-4ab5-b213-d089bf17fff8
+		summarizeBy: sum
+		sourceColumn: Interest_Earned
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column Delinquent_Acc
+		dataType: int64
+		formatString: 0
+		lineageTag: 631723b4-bca5-4fdc-b174-fa131742d9a1
+		summarizeBy: sum
+		sourceColumn: Delinquent_Acc
+
+		annotation SummarizationSetBy = Automatic
+
+	column Revenue = credit_card[Annual_Fees]+credit_card[Total_Trans_Amt]+credit_card[Interest_Earned]
+		formatString: 0
+		lineageTag: 56a974c0-c941-472f-914b-db23791d681c
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column week_num2 = WEEKNUM(credit_card[Week_Start_Date])
+		formatString: 0
+		lineageTag: da04e30a-9095-466b-bc16-1adcb9ce8582
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition credit_card = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\RAJDEEP\Downloads\credit_card.csv"),[Delimiter=",", Columns=18, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Client_Num", Int64.Type}, {"Card_Category", type text}, {"Annual_Fees", Int64.Type}, {"Activation_30_Days", Int64.Type}, {"Customer_Acq_Cost", Int64.Type}, {"Week_Start_Date", type date}, {"Week_Num", type text}, {"Qtr", type text}, {"current_year", Int64.Type}, {"Credit_Limit", type number}, {"Total_Revolving_Bal", Int64.Type}, {"Total_Trans_Amt", Int64.Type}, {"Total_Trans_Vol", Int64.Type}, {"Avg_Utilization_Ratio", type number}, {"Use Chip", type text}, {"Exp Type", type text}, {"Interest_Earned", type number}, {"Delinquent_Acc", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

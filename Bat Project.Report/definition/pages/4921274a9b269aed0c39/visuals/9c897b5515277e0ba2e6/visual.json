@@ -1,0 +1,125 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "9c897b5515277e0ba2e6",
+  "position": {
+    "x": 0,
+    "y": 118.01068694618002,
+    "z": 0,
+    "height": 197.59928977034792,
+    "width": 463.80944404428885,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "credit_card"
+                    }
+                  },
+                  "Property": "week_num2"
+                }
+              },
+              "queryRef": "Sum(credit_card.week_num2)",
+              "nativeQueryRef": "week_num2"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "credit_card"
+                    }
+                  },
+                  "Property": "Prev_week_revenue"
+                }
+              },
+              "queryRef": "credit_card.Prev_week_revenue",
+              "nativeQueryRef": "Prev_week_revenue"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "credit_card"
+                    }
+                  },
+                  "Property": "Current_week_revenue"
+                }
+              },
+              "queryRef": "credit_card.Current_week_revenue",
+              "nativeQueryRef": "Current_week_revenue"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "credit_card"
+                    }
+                  },
+                  "Property": "wow_Revenue"
+                }
+              },
+              "queryRef": "credit_card.wow_Revenue",
+              "nativeQueryRef": "wow_Revenue"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "credit_card"
+                  }
+                },
+                "Property": "week_num2"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "values": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "13D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "total": [
+        {
+          "properties": {
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

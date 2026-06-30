@@ -1,0 +1,145 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "e88e74d3adb39c0b1260",
+  "position": {
+    "x": 9.81600319531354,
+    "y": 212.27106909865532,
+    "z": 7000,
+    "height": 184.05005991212889,
+    "width": 531.29117294634534,
+    "tabOrder": 7000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "credit_card"
+                    }
+                  },
+                  "Property": "Card_Category"
+                }
+              },
+              "queryRef": "credit_card.Card_Category",
+              "nativeQueryRef": "Card_Category"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "credit_card"
+                        }
+                      },
+                      "Property": "Revenue"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(credit_card.Revenue)",
+              "nativeQueryRef": "Sum of Revenue"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "credit_card"
+                        }
+                      },
+                      "Property": "Total_Trans_Amt"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(credit_card.Total_Trans_Amt)",
+              "nativeQueryRef": "Sum of Total_Trans_Amt"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "credit_card"
+                        }
+                      },
+                      "Property": "Interest_Earned"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(credit_card.Interest_Earned)",
+              "nativeQueryRef": "Sum of Interest_Earned"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Aggregation": {
+                "Expression": {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "credit_card"
+                      }
+                    },
+                    "Property": "Revenue"
+                  }
+                },
+                "Function": 0
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "grid": [
+        {
+          "properties": {
+            "gridHorizontalWeight": {
+              "expr": {
+                "Literal": {
+                  "Value": "5D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "13D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

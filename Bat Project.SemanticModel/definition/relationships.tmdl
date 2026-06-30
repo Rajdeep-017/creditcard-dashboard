@@ -1,0 +1,11 @@
+relationship eb3fe82c-9721-47db-93d1-e70de8ad03ff
+	joinOnDateBehavior: datePartOnly
+	fromColumn: credit_card.Week_Start_Date
+	toColumn: LocalDateTable_416a643f-aedb-4d45-a7b3-1ccb0c134689.Date
+
+relationship AutoDetected_073b2a64-d8e8-4498-9cbe-7f57d631f4b5
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: customer.Client_Num
+	toColumn: credit_card.Client_Num
+

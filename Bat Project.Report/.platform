@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Bat Project"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "20dd382b-f4b4-48a7-871a-7ffa8e40ab36"
+  }
+}

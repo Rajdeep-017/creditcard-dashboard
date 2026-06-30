@@ -1,0 +1,172 @@
+table customer
+	lineageTag: 48a0b449-5163-4aa5-9b0a-c5f1c98c45ed
+
+	column Client_Num
+		dataType: int64
+		formatString: 0
+		lineageTag: 4abaf877-d98e-45de-9868-e23de453fcab
+		summarizeBy: none
+		sourceColumn: Client_Num
+
+		annotation SummarizationSetBy = Automatic
+
+	column Customer_Age
+		dataType: int64
+		lineageTag: 8740557e-9433-4199-b4ab-ca52329e6c56
+		summarizeBy: sum
+		sourceColumn: Customer_Age
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Gender
+		dataType: string
+		lineageTag: 57b3354f-1d80-41aa-b736-98b8d6568fc2
+		summarizeBy: none
+		sourceColumn: Gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dependent_Count
+		dataType: int64
+		formatString: 0
+		lineageTag: a7ce2ba4-c6e1-4794-8da4-8a78b9d591da
+		summarizeBy: sum
+		sourceColumn: Dependent_Count
+
+		annotation SummarizationSetBy = Automatic
+
+	column Education_Level
+		dataType: string
+		lineageTag: 1ca8d738-b9c3-428d-885d-ddd1e057071f
+		summarizeBy: none
+		sourceColumn: Education_Level
+
+		annotation SummarizationSetBy = Automatic
+
+	column Marital_Status
+		dataType: string
+		lineageTag: 891ceff3-2141-468d-9454-9a7d48ff14d3
+		summarizeBy: none
+		sourceColumn: Marital_Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column state_cd
+		dataType: string
+		lineageTag: e3aa11b3-48e2-477a-807f-d8b5955e5d13
+		summarizeBy: none
+		sourceColumn: state_cd
+
+		annotation SummarizationSetBy = Automatic
+
+	column Zipcode
+		dataType: int64
+		formatString: 0
+		lineageTag: d9376995-7b2a-414b-b3ba-896d24df829c
+		summarizeBy: sum
+		sourceColumn: Zipcode
+
+		annotation SummarizationSetBy = Automatic
+
+	column Car_Owner
+		dataType: string
+		lineageTag: 172dd1f5-ac4b-4c32-8d8c-afbed4bd3a83
+		summarizeBy: none
+		sourceColumn: Car_Owner
+
+		annotation SummarizationSetBy = Automatic
+
+	column House_Owner
+		dataType: string
+		lineageTag: 87dbff88-0ff0-49e6-8abf-8fdc75585634
+		summarizeBy: none
+		sourceColumn: House_Owner
+
+		annotation SummarizationSetBy = Automatic
+
+	column Personal_loan
+		dataType: string
+		lineageTag: dddc10ee-ae74-41bc-9771-6c9d80e11ccf
+		summarizeBy: none
+		sourceColumn: Personal_loan
+
+		annotation SummarizationSetBy = Automatic
+
+	column contact
+		dataType: string
+		lineageTag: 0137588d-b5eb-4a00-bfec-82b334d41403
+		summarizeBy: none
+		sourceColumn: contact
+
+		annotation SummarizationSetBy = Automatic
+
+	column Customer_Job
+		dataType: string
+		lineageTag: e6adfc66-f104-4297-a774-cdab0701a00a
+		summarizeBy: none
+		sourceColumn: Customer_Job
+
+		annotation SummarizationSetBy = Automatic
+
+	column Income
+		dataType: int64
+		formatString: 0
+		lineageTag: e374bf06-61ba-4d7c-ad38-30d8344abe88
+		summarizeBy: sum
+		sourceColumn: Income
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cust_Satisfaction_Score
+		dataType: int64
+		formatString: 0
+		lineageTag: 10adc885-1bbf-4c9d-9faf-e2156eeb68bf
+		summarizeBy: sum
+		sourceColumn: Cust_Satisfaction_Score
+
+		annotation SummarizationSetBy = Automatic
+
+	column AgeGroup = ```
+			SWITCH(
+			    TRUE(),
+			    customer[Customer_Age]<30, "20-30",
+			    customer[Customer_Age]>=30 && customer[Customer_Age]<40, "30-40",
+			    customer[Customer_Age]>=40 && customer[Customer_Age]<50, "40-50",
+			    customer[Customer_Age]>=40 && customer[Customer_Age]<60, "50-60",
+			    customer[Customer_Age]>=60, "60+",
+			    "unknown"
+			    )
+			
+			```
+		lineageTag: b9be9e9d-f3c5-4d70-a8ef-b94a5329960b
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column IncomeGroup =
+			SWITCH(
+			    TRUE(),
+			    customer[Income]<35000, "Low",
+			    customer[Income]>=35000 && customer[Income]<70000, "Med",
+			    customer[Income]>70000, "High",
+			    "unknown"
+			)
+		lineageTag: 767f6509-e93b-48ba-a63c-5e01dc007ead
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition customer = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\RAJDEEP\Downloads\customer.csv"),[Delimiter=",", Columns=15, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Client_Num", Int64.Type}, {"Customer_Age", Int64.Type}, {"Gender", type text}, {"Dependent_Count", Int64.Type}, {"Education_Level", type text}, {"Marital_Status", type text}, {"state_cd", type text}, {"Zipcode", Int64.Type}, {"Car_Owner", type text}, {"House_Owner", type text}, {"Personal_loan", type text}, {"contact", type text}, {"Customer_Job", type text}, {"Income", Int64.Type}, {"Cust_Satisfaction_Score", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
